@@ -1,11 +1,14 @@
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Background } from '../../components/Background';
 
 import { styles } from './styles';
 
 export function Game() {
   return (
-    <View style={styles.container}>
+    <Background>
+      <SafeAreaView style={styles.container}>
 
-    </View>
+      </SafeAreaView>
+    </Background>
   );
 }
