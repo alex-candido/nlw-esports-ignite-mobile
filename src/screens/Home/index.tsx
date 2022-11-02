@@ -1,16 +1,25 @@
-import React from 'react';
-import { FlatList, Image, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { FlatList, Image } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import logoImg from '../../assets/logo-nlw-esports.png';
-import { GameCard } from '../../components/GameCard';
+import { GameCard, GameCardProps } from '../../components/GameCard';
 import { Heading } from '../../components/Heading';
-import { GAMES } from '../../utils/games';
+import { api } from '../../services/api';
 
 import { styles } from './styles';
 
 export function Home() {
+  const [games, setgames] = useState<GameCardProps[]>([]);
+
+  useEffect(() => {
+    api.get('/games').then((response) => {
+      setgames(response.data);
+    })
+  }, [])
+
   return (
-    <View style={styles.container}>
+    <SafeAreaView  style={styles.container}>
       <Image 
         source={logoImg}
         style={styles.logo}
@@ -22,7 +31,7 @@ export function Home() {
       />
 
       <FlatList
-        data={GAMES}
+        data={games}
         keyExtractor={item => item.id}
         renderItem={({ item }) => (
           <GameCard 
@@ -31,9 +40,9 @@ export function Home() {
         )}
         showsHorizontalScrollIndicator={false}
         horizontal
+        contentContainerStyle={styles.contentList}
       />
-
       
-    </View>
+    </SafeAreaView >
   );
 }
