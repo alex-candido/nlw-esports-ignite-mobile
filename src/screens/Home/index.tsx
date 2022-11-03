@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,6 +13,12 @@ import { styles } from './styles';
 
 export function Home() {
   const [games, setgames] = useState<GameCardProps[]>([]);
+
+  const navigation = useNavigation();
+
+  function handleOpenGaming({ id, title, bannerUrl }: GameCardProps) {
+    navigation.navigate('game', { id, title, bannerUrl });
+  }
 
   useEffect(() => {
     api.get('/games').then((response) => {
@@ -37,7 +44,8 @@ export function Home() {
           keyExtractor={item => item.id}
           renderItem={({ item }) => (
             <GameCard 
-            data={item}
+              data={item}
+              onPress={() => handleOpenGaming(item)}
             />
           )}
           showsHorizontalScrollIndicator={false}
