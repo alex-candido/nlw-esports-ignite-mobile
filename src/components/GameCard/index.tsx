@@ -1,16 +1,8 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
 import { ImageBackground, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
 import { THEME } from '../../theme';
 
 import { styles } from './styles';
-
-// export interface GameCardProps {
-//   id: string;
-//   name: string;
-//   ads: string;
-//   cover: ImageSourcePropType;
-// }
 
 export interface GameCardProps {
   id: string;
