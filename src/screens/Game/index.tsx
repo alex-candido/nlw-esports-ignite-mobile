@@ -13,10 +13,13 @@ import { styles } from './styles';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { DuoCard, DuoCardProps } from '../../components/DuoCard';
 import { Heading } from '../../components/Heading';
+import { DuoMatch } from '../../DuoMatch';
 import { api } from '../../services/api';
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('alex_cndd#0506');
+
   const navigation = useNavigation();
   const route = useRoute();
   const game = route.params as GameParams;
@@ -83,6 +86,11 @@ export function Game() {
           }
         />
 
+        <DuoMatch
+          visible={discordDuoSelected.length > 0}
+          discord={discordDuoSelected}
+          onClose={() => setDiscordDuoSelected('')}
+        />
       </SafeAreaView>
     </Background>
   );
