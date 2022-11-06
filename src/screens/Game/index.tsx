@@ -18,7 +18,7 @@ import { api } from '../../services/api';
 
 export function Game() {
   const [duos, setDuos] = useState<DuoCardProps[]>([]);
-  const [discordDuoSelected, setDiscordDuoSelected] = useState('alex_cndd#0506');
+  const [discordDuoSelected, setDiscordDuoSelected] = useState('');
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -27,6 +27,11 @@ export function Game() {
   function handleGoBack() {
     navigation.goBack();
   }
+
+  async function getDiscordUser(adsId: string) {
+    api.get(`/ads/${adsId}/discord`).then((response) => 
+      setDiscordDuoSelected(response.data.discord)
+  )}
 
   useEffect(() => {
     api.get(`/games/${game.id}/ads`).then((response) => {
@@ -72,7 +77,7 @@ export function Game() {
           renderItem={({ item }) => (
             <DuoCard 
               data={item}
-              onConnect={() => {}}
+              onConnect={() => getDiscordUser(item.id)}
             />
           )}
           horizontal
