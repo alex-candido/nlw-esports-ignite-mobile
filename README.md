@@ -58,5 +58,6 @@ $ npm install
 ```
 $ npx expo start
 ```
+<img src="/src/assets/banner-mobile.png" alt="Screens">
 
 Feito por Alex Cândido [Linkedin](https://www.linkedin.com/in/alexcndd/)
